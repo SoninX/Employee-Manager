@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Absence</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../pages/employee-home.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Absence Application</h1>
+
+        <section class="employee-info">
+            <table>
+                <tr>
+                    <th>Department</th>
+                    <th>Employee Name</th>
+                    <th>Employee ID</th>
+                </tr>
+                <tr>
+                    <td><input type="text" id="department"></td>
+                    <td><input type="text" id="employee-name"></td>
+                    <td><input type="text" id="employee-id"></td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="date-selection">
+            <label for="month">Month:</label>
+            <select id="month"></select>
+
+            <label for="year">Year:</label>
+            <select id="year"></select>
+        </section>
+
+        <section class="leave-application">
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Shift</th>
+                    <th>Out</th>
+                    <th>In</th>
+                    <th>SA (Mts)</th>
+                    <th>Reason</th>
+                    <th>Remarks</th>
+                </tr>
+                <tr>
+                    <td><input type="date" id="date"></td>
+                    <td><input type="text" id="shift"></td>
+                    <td><input type="time" id="out-time"></td>
+                    <td><input type="time" id="in-time"></td>
+                    <td><input type="number" id="sa-minutes"></td>
+                    <td>
+                        <select id="reason">
+                            <option value="personal">Personal</option>
+                            <option value="official">Official</option>
+                        </select>
+                    </td>
+                    <td><input type="text" id="remarks"></td>
+                </tr>
+            </table>
+        </section>
+
+        <button id="submit-btn">Submit</button>
+    </main>
+
+    <footer>
+        <!-- add footer -->
+    </footer>
+
+    <script src="../js/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Employees</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../pages/admin-home.html">Home</a></li>
+                <li><a href="../pages/admin-approval.html">Approval Requests</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Manage Employees</h1>
+
+        <section class="search-section">
+            <input type="text" id="employee-search" placeholder="Search for Employee by Name or ID" oninput="filterEmployees()">
+            <ul id="suggestions" class="suggestions-list"></ul>
+        </section>
+
+        <section class="filter-section">
+            <label for="month">Month:</label>
+            <select id="month"></select>
+
+            <label for="year">Year:</label>
+            <select id="year"></select>
+        </section>
+
+        <section class="requests-list">
+            <h2>Pending Approval Requests</h2>
+            <table id="requests-table">
+                <thead>
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Employee ID</th>
+                        <th>Date</th>
+                        <th>Reason</th>
+                    </tr>
+                </thead>
+                <tbody id="requests-body">
+                    <!-- Dynamic rows will be inserted here -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <!-- add footer -->
+    </footer>
+
+    <script src="../js/scripts.js"></script>
+</body>
+</html>
