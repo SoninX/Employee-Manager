@@ -10,7 +10,9 @@
     <header>
         <nav>
             <ul>
-                <li><a href="../pages/employee-home.html">Home</a></li>
+                <li><a href="employee-home.html" class="active">Home</a></li>
+                <li><a href="#">Payroll</a></li>
+                <li><a href="#" id="logout-btn">Logout</a></li>
             </ul>
         </nav>
     </header>
@@ -18,7 +20,7 @@
     <main>
         <h1>Absence Application</h1>
 
-        <section class="employee-info">
+        <section class="container employee-info">
             <table>
                 <tr>
                     <th>Department</th>
@@ -26,14 +28,14 @@
                     <th>Employee ID</th>
                 </tr>
                 <tr>
-                    <td><input type="text" id="department"></td>
-                    <td><input type="text" id="employee-name"></td>
-                    <td><input type="text" id="employee-id"></td>
+                    <td><input type="text" id="department" placeholder="Enter department"></td>
+                    <td><input type="text" id="employee-name" placeholder="Enter employee name"></td>
+                    <td><input type="text" id="employee-id" placeholder="Enter employee ID"></td>
                 </tr>
             </table>
         </section>
 
-        <section class="date-selection">
+        <section class="container date-selection">
             <label for="month">Month:</label>
             <select id="month"></select>
 
@@ -41,14 +43,14 @@
             <select id="year"></select>
         </section>
 
-        <section class="leave-application">
+        <section class="container leave-application">
             <table>
                 <tr>
                     <th>Date</th>
                     <th>Shift</th>
                     <th>Out</th>
                     <th>In</th>
-                    <th>SA (Mts)</th>
+                    <th>SA (Mins)</th>
                     <th>Reason</th>
                     <th>Remarks</th>
                 </tr>
@@ -57,19 +59,22 @@
                     <td><input type="text" id="shift"></td>
                     <td><input type="time" id="out-time"></td>
                     <td><input type="time" id="in-time"></td>
-                    <td><input type="number" id="sa-minutes"></td>
-                    <td>
-                        <select id="reason">
+                    <td><input type="number" id="sa-minutes" placeholder="Enter minutes"></td>
+                    <td width="15%">
+                        <select id="reason"> <!-- Ensure the ID is unique and matches your JS -->
+                            <option value="" disabled selected>Select reason</option>
                             <option value="personal">Personal</option>
                             <option value="official">Official</option>
                         </select>
-                    </td>
-                    <td><input type="text" id="remarks"></td>
+                    </td>                    
+                    <td><input type="text" id="remarks" placeholder="Enter remarks"></td>
                 </tr>
             </table>
         </section>
 
-        <button id="submit-btn">Submit</button>
+        <form id="leave-form" class="container">
+            <button type="submit" class="btn">Submit</button>
+        </form>
     </main>
 
     <footer>

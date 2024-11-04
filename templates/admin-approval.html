@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Request Approval</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- Page Header -->
+    <header>
+        <h1>Admin Approval</h1>
+    </header>
+
+    <!-- Request Details -->
+    <main>
+        <section class="container">
+            <h2>Request Details</h2>
+            <div class="form-group">
+                <p><strong>Employee Name:</strong> <span id="employee-name"></span></p>
+                <p><strong>Employee ID:</strong> <span id="employee-id"></span></p>
+                <p><strong>Department:</strong> <span id="department"></span></p>
+                <p><strong>Date:</strong> <span id="date"></span></p>
+                <p><strong>Shift:</strong> <span id="shift"></span></p>
+                <p><strong>Out Time:</strong> <span id="out-time"></span></p>
+                <p><strong>In Time:</strong> <span id="in-time"></span></p>
+                <p><strong>Duration:</strong> <span id="sa-minutes"></span></p>
+                <p><strong>Reason:</strong> <span id="reason"></span></p>
+                <p><strong>Remarks:</strong> <span id="remarks"></span></p>
+                <p><strong>Status:</strong> <span id="status-message"></span></p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div>
+                <button class="btn btn-success" onclick="handleApproval(true)">Approve</button>
+                <button class="btn btn-danger" onclick="handleApproval(false)">Reject</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

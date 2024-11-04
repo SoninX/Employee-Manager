@@ -1,128 +1,291 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
+/* Reset and Base Styles */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+/* Header Styles */
 header {
-    background-color: #4CAF50;
+    background-color: #2c3e50;
     color: white;
     padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-header nav ul {
+nav ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     justify-content: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
-header nav ul li {
-    margin: 0 1rem;
-}
-
-header nav ul li a {
+nav a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
-header nav ul li a:hover {
-    text-decoration: underline;
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Main Content Styles */
 main {
-    padding: 2rem;
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.container {
     background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    text-align: center;
-    color: #4CAF50;
+/* Form Styles */
+.form-group {
+    margin-bottom: 1.5rem;
 }
 
-section {
-    margin-bottom: 20px;
-}
-
-section.employee-info table,
-section.leave-application table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-section.employee-info th,
-section.leave-application th,
-section.employee-info td,
-section.leave-application td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
-
-section.employee-info th,
-section.leave-application th {
-    background-color: #f2f2f2;
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
 }
 
 input[type="text"],
 input[type="date"],
 input[type="time"],
 input[type="number"],
-select {
+select,
+textarea {
     width: 100%;
-    padding: 8px;
-    margin: 5px 0;
-    box-sizing: border-box;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
 }
 
-button,
-a.button {
-    display: block;
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Table Styles */
+table {
     width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background-color: white;
+}
+
+th,
+td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Button Styles */
+.btn {
+    display: block;
+    width: 20%;
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: #142359;
     color: white;
     border: none;
     font-size: 16px;
     text-align: center;
     text-decoration: none;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-left: 880px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
-    background-color: #45a049;
-    transform: translateY(-2px);
-}
-
-footer {
-    background-color: #333;
+.btn-primary {
+    background-color: #3498db;
     color: white;
-    text-align: center;
-    padding: 1rem;
-    position: fixed;
-    bottom: 0;
+}
+
+.btn-success {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.pending {
+    background-color: #f1c40f;
+    color: #000;
+}
+
+.approved {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.rejected {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* Search and Filter Section */
+.search-section {
+    margin-bottom: 2rem;
+}
+
+.search-input {
     width: 100%;
-}
-
-footer p {
-    margin: 5px 0;
-}
-
-.Dashboard, .recent-activity {
-    margin-top: 2rem;
+    padding: 0.75rem;
     border: 1px solid #ddd;
-    padding: 1rem;
-    border-radius: 5px;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.filter-section {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Notification Styles */
+.notification {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    color: white;
+    animation: slideIn 0.3s ease-out;
+    z-index: 1000;
+}
+
+.notification.success {
+    background-color: #2ecc71;
+}
+
+.notification.error {
+    background-color: #e74c3c;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Dashboard Styles */
+.Dashboard {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.recent-requests {
+    margin-top: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .filter-section {
+        flex-direction: column;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
 }

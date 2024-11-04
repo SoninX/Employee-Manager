@@ -10,26 +10,32 @@
     <header>
         <nav>
             <ul>
-                <li><a href="../templates/e-Home.html">Home</a></li>
+                <li><a href="employee-home.html" class="active">Home</a></li>
+                <li><a href="#">Payroll</a></li>
+                <li><a href="#" id="logout-btn">Logout</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <h1>Welcome, Employee Name</h1>
+        <h1>Welcome, <span id="employee-name">Employee</span></h1>
+        
         <section class="Dashboard">
-            <h2>Dashboard</h2>
-            <p>Name: [name]</p>
-            <p>Department: [Department]</p>
-            <a href="employee-absence.html" class="button">Absence</a>
+            <h2>Your Information</h2>
+            <div class="employee-details">
+                <p>Employee ID: <span id="employee-id">[ID]</span></p>
+                <p>Department: <span id="employee-dept">[Department]</span></p>
+                <section class="quick-actions">
+                    <a href="employee-absence.html" class="btn">New Leave Request</a>
+                </section>
+            </div>
         </section>
 
     </main>
-
     <footer>
         <!-- add footer -->
     </footer>
 
-    <script src="scripts.js"></script>
+    <script src="../js/scripts.js"></script>
 </body>
 </html>
