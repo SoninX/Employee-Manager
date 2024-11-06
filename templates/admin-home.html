@@ -4,33 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Home</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="admin-home.html" class="active">Home</a></li>
-                <li><a href="#">Payroll</a></li>
-                <li><a href="#" id="logout-btn">Logout</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Admin Portal</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="admin-home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Payroll</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logout-btn">Logout</a>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </header>
 
-    <main>
-        <h1>Welcome, Admin Name</h1>
-        <section class="Dashboard">
-            <h2>Dashboard</h2>
-            <p>Name: [Admin Name]</p>
-            <p>Role: Admin</p>
-            <a href="../templates/admin-employees.html" class="button">Approval</a>
+    <main class="container my-5">
+        <div class="text-center">
+            <h1>Welcome <span id="admin-name">Admin</span></h1>
+        </div>
+
+        <section class="dashboard bg-light p-4 rounded shadow-sm mt-4">
+            <h2 class="text-center mb-3">Dashboard</h2>
+            <div class="text-center mt-4">
+                <a href="../templates/admin-employees.html" class="btn btn-primary">Approvals</a>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <!-- add footer -->
+    <footer class="text-center py-3 bg-light">
+        <p>&copy; 2024 Company Name. All rights reserved.</p>
     </footer>
 
-    <script src="../js/scripts.js"></script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Retrieve the userId from local storage
+            const userId = localStorage.getItem('userId');
+            const adminNameElement = document.getElementById('admin-name');
+
+            if (userId) {
+                // Display the userId in the admin-name span
+                adminNameElement.textContent = userId;
+            } else {
+                // Redirect to login if no userId is found
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
 </body>
 </html>

@@ -4,56 +4,229 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Employees</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="../pages/admin-home.html">Home</a></li>
-                <li><a href="../pages/admin-approval.html">Approval Requests</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Admin Portal</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../pages/admin-home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../pages/admin-approval.html">Approval Requests</a>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </header>
 
-    <main>
-        <h1>Manage Employees</h1>
+    <main class="container my-5">
+        <h1 class="text-center mb-4">Manage Employees</h1>
 
-        <section class="search-section">
-            <input type="text" id="employee-search" placeholder="Search for Employee by Name or ID" oninput="filterEmployees()">
-            <ul id="suggestions" class="suggestions-list"></ul>
+        <section class="search-section mb-4">
+            <div class="input-group">
+                <input type="text" id="employee-search" class="form-control" placeholder="Search for Employee by Name or ID" oninput="filterEmployees()">
+            </div>
+            <ul id="suggestions" class="list-group mt-2"></ul>
         </section>
 
-        <section class="filter-section">
-            <label for="month">Month:</label>
-            <select id="month"></select>
-
-            <label for="year">Year:</label>
-            <select id="year"></select>
+        <section class="filter-section row mb-4">
+            <div class="col-md-6">
+                <label for="month">Month:</label>
+                <select id="month" class="form-control"></select>
+            </div>
+            <div class="col-md-6">
+                <label for="year">Year:</label>
+                <select id="year" class="form-control"></select>
+            </div>
         </section>
 
+        <!-- Pending Approval Requests Section -->
         <section class="requests-list">
-            <h2>Pending Approval Requests</h2>
-            <table id="requests-table">
-                <thead>
-                    <tr>
-                        <th>Employee Name</th>
-                        <th>Employee ID</th>
-                        <th>Date</th>
-                        <th>Reason</th>
-                    </tr>
-                </thead>
-                <tbody id="requests-body">
-                    <!-- Dynamic rows will be inserted here -->
-                </tbody>
-            </table>
+            <h2 class="text-center mb-3">Pending Approval Requests</h2>
+            <div class="table-responsive">
+                <table id="requests-table" class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Employee Name</th>
+                            <th>Employee ID</th>
+                            <th>Date</th>
+                            <th>Reason</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="requests-body">
+                        <!-- Dynamic rows will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Approved Requests Section -->
+        <section class="approved-requests-list mt-5">
+            <h2 class="text-center mb-3">Approved Requests</h2>
+            <div class="table-responsive">
+                <table id="approved-requests-table" class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Employee Name</th>
+                            <th>Employee ID</th>
+                            <th>Date</th>
+                            <th>Reason</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="approved-requests-body">
+                        <!-- Dynamic rows for approved requests will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <!-- add footer -->
+    <footer class="text-center py-3 bg-light">
+        <p>&copy; 2024 Company Name. All rights reserved.</p>
     </footer>
 
-    <script src="../js/scripts.js"></script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const monthSelect = document.getElementById('month');
+            const yearSelect = document.getElementById('year');
+            const searchInput = document.getElementById('employee-search');
+            
+            // Populate the month and year dropdowns
+            const populateDropdowns = () => {
+                const currentDate = new Date();
+                const currentYear = currentDate.getFullYear();
+                const currentMonth = currentDate.getMonth();
+
+                // Populate months
+                for (let i = 0; i < 12; i++) {
+                    const option = document.createElement('option');
+                    option.value = (i + 1).toString().padStart(2, '0');
+                    option.text = new Date(0, i).toLocaleString('default', { month: 'long' });
+                    monthSelect.add(option);
+                }
+                monthSelect.value = (currentMonth + 1).toString().padStart(2, '0');
+
+                // Populate years (current year, previous year, next year)
+                for (let year = currentYear - 1; year <= currentYear + 1; year++) {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.text = year;
+                    yearSelect.add(option);
+                }
+                yearSelect.value = currentYear;
+            };
+
+            // Fetches stored leave requests from local storage
+            const getLocalStorageData = (key) => {
+                return JSON.parse(localStorage.getItem(key)) || [];
+            };
+
+            // Renders leave requests in the HTML table
+            const renderRequestsTable = (requests) => {
+                const tbody = document.getElementById('requests-body');
+                tbody.innerHTML = '';
+
+                requests.forEach(request => {
+                    if (request.status !== 'approved') {  // Only render requests that are not approved
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${request.employeeName}</td>
+                            <td>${request.employeeId}</td>
+                            <td>${formatDate(request.date)}</td>
+                            <td>${request.reason}</td>
+                            <td><button onclick="viewRequest('${request.id}')" class="view-btn">View Details</button></td>
+                        `;
+                        tbody.appendChild(row);
+                    }
+                });
+            };
+
+            // Renders approved requests in the HTML table
+            const renderApprovedRequestsTable = (requests) => {
+                const tbody = document.getElementById('approved-requests-body');
+                tbody.innerHTML = '';
+
+                requests.forEach(request => {
+                    if (request.status === 'approved') {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${request.employeeName}</td>
+                            <td>${request.employeeId}</td>
+                            <td>${formatDate(request.date)}</td>
+                            <td>${request.reason}</td>
+                            <td><button onclick="viewRequest('${request.id}')" class="view-btn">View Details</button></td>
+                        `;
+                        tbody.appendChild(row);
+                    }
+                });
+            };
+
+            // Formats a date string to a readable format
+            const formatDate = (dateString) => {
+                const date = new Date(dateString);
+                return date.toLocaleDateString();
+            };
+
+            // Filters requests based on month, year, and search input
+            const filterRequests = () => {
+                const selectedMonth = monthSelect.value;
+                const selectedYear = yearSelect.value;
+                const searchValue = searchInput.value.toLowerCase();
+                const requests = getLocalStorageData('leaveRequests');
+
+                // Filter requests by month, year, and search input
+                const filteredRequests = requests.filter(request => {
+                    const requestDate = new Date(request.date);
+                    const monthMatch = !selectedMonth || (requestDate.getMonth() + 1) === parseInt(selectedMonth);
+                    const yearMatch = !selectedYear || requestDate.getFullYear() === parseInt(selectedYear);
+                    const searchMatch = !searchValue ||
+                        request.employeeName.toLowerCase().includes(searchValue) ||
+                        request.employeeId.toLowerCase().includes(searchValue);
+
+                    return monthMatch && yearMatch && searchMatch;
+                });
+
+                // Render the filtered requests in the table
+                renderRequestsTable(filteredRequests);
+                renderApprovedRequestsTable(requests); // Also render approved requests
+            };
+
+            // Initialize dropdowns and render all requests on page load
+            populateDropdowns();
+            filterRequests();
+
+            // Set up event listeners for filtering actions
+            monthSelect.addEventListener('change', filterRequests);
+            yearSelect.addEventListener('change', filterRequests);
+            searchInput.addEventListener('input', filterRequests);
+        });
+
+        // Function to view the details of the selected leave request
+        function viewRequest(requestId) {
+            const leaveRequests = JSON.parse(localStorage.getItem('leaveRequests') || '[]');
+            const selectedRequest = leaveRequests.find(request => request.id === requestId);
+
+            // Save selected request to localStorage for use on the details page
+            localStorage.setItem('selectedRequest', JSON.stringify(selectedRequest));
+
+            // Redirect to the leave request details page
+            window.location.href = 'admin-approval.html';
+        }
+    </script>
 </body>
 </html>

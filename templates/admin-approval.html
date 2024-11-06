@@ -4,19 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leave Request Approval</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <!-- Page Header -->
-    <header>
+    <header class="bg-primary text-white text-center py-3">
         <h1>Admin Approval</h1>
     </header>
 
-    <!-- Request Details -->
-    <main>
-        <section class="container">
-            <h2>Request Details</h2>
-            <div class="form-group">
+    <main class="container my-5">
+        <section class="bg-light p-4 rounded shadow-sm">
+            <h2 class="text-center mb-4">Request Details</h2>
+            <div>
                 <p><strong>Employee Name:</strong> <span id="employee-name"></span></p>
                 <p><strong>Employee ID:</strong> <span id="employee-id"></span></p>
                 <p><strong>Department:</strong> <span id="department"></span></p>
@@ -27,17 +26,76 @@
                 <p><strong>Duration:</strong> <span id="sa-minutes"></span></p>
                 <p><strong>Reason:</strong> <span id="reason"></span></p>
                 <p><strong>Remarks:</strong> <span id="remarks"></span></p>
-                <p><strong>Status:</strong> <span id="status-message"></span></p>
             </div>
-
-            <!-- Action Buttons -->
-            <div>
-                <button class="btn btn-success" onclick="handleApproval(true)">Approve</button>
-                <button class="btn btn-danger" onclick="handleApproval(false)">Reject</button>
+            <div class="text-center mt-4">
+                <!-- Approve and Reject buttons -->
+                <button class="btn btn-success mr-3" id="approve-btn">Approve</button>
+                <button class="btn btn-danger" id="reject-btn">Reject</button>
             </div>
         </section>
     </main>
 
-    <script src="../js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectedRequest = JSON.parse(localStorage.getItem('selectedRequest'));
+    
+            if (selectedRequest) {
+                // Populate the request details on the page
+                document.getElementById('employee-name').textContent = selectedRequest.employeeName;
+                document.getElementById('employee-id').textContent = selectedRequest.employeeId;
+                document.getElementById('department').textContent = selectedRequest.department;
+                document.getElementById('date').textContent = selectedRequest.date;
+                document.getElementById('shift').textContent = selectedRequest.shift;
+                document.getElementById('out-time').textContent = selectedRequest.outTime;
+                document.getElementById('in-time').textContent = selectedRequest.inTime;
+                document.getElementById('sa-minutes').textContent = selectedRequest.duration;
+                document.getElementById('reason').textContent = selectedRequest.reason;
+                document.getElementById('remarks').textContent = selectedRequest.remarks;
+    
+                // Approve button functionality
+                document.getElementById('approve-btn').addEventListener('click', () => {
+                    selectedRequest.status = 'approved'; // Mark request as approved
+                    
+                    // Get the list of leave requests from localStorage
+                    let leaveRequests = JSON.parse(localStorage.getItem('leaveRequests') || '[]');
+                    
+                    // Find the request and update its status in the list
+                    const index = leaveRequests.findIndex(request => request.id === selectedRequest.id);
+                    if (index !== -1) {
+                        leaveRequests[index] = selectedRequest; // Update the request status
+                        localStorage.setItem('leaveRequests', JSON.stringify(leaveRequests)); // Save to localStorage
+                    }
+    
+                    alert('Leave request approved.');
+                    window.location.href = 'admin-home.html'; // Redirect to home page after approval
+                });
+    
+                // Reject button functionality
+                document.getElementById('reject-btn').addEventListener('click', () => {
+                    const rejectionReason = prompt('Please enter a reason for rejection:');
+                    if (rejectionReason) {
+                        selectedRequest.rejectionReason = rejectionReason;
+                        selectedRequest.status = 'rejected'; // Mark request as rejected
+                        
+                        // Get the list of leave requests from localStorage
+                        let leaveRequests = JSON.parse(localStorage.getItem('leaveRequests') || '[]');
+                        
+                        // Find and remove the request from the list
+                        const index = leaveRequests.findIndex(request => request.id === selectedRequest.id);
+                        if (index !== -1) {
+                            leaveRequests.splice(index, 1); // Remove the rejected request
+                            localStorage.setItem('leaveRequests', JSON.stringify(leaveRequests)); // Save to localStorage
+                        }
+    
+                        alert('Leave request rejected and deleted.');
+                        window.location.href = 'admin-home.html'; // Redirect to home page after rejection
+                    }
+                });
+            } else {
+                alert('No leave request found.');
+            }
+        });
+    </script>
+    
 </body>
 </html>

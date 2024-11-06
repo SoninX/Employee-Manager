@@ -4,83 +4,167 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Absence</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="employee-home.html" class="active">Home</a></li>
-                <li><a href="#">Payroll</a></li>
-                <li><a href="#" id="logout-btn">Logout</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Employee Portal</a>
+            <!-- Additional nav elements here -->
         </nav>
     </header>
 
-    <main>
-        <h1>Absence Application</h1>
+    <main class="container my-5">
+        <h1 class="text-center mb-4">Absence Application</h1>
+        
+        <form id="leave-form" class="text-center">
+            <!-- Employee Info -->
+            <section class="employee-info mb-4">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Department</th>
+                                <th>Employee Name</th>
+                                <th>Employee ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" class="form-control" id="department" placeholder="Enter department" required></td>
+                                <td><input type="text" class="form-control" id="employee-name" placeholder="Enter employee name" required></td>
+                                <td><input type="text" class="form-control" id="employee-id" placeholder="Enter employee ID" required></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
 
-        <section class="container employee-info">
-            <table>
-                <tr>
-                    <th>Department</th>
-                    <th>Employee Name</th>
-                    <th>Employee ID</th>
-                </tr>
-                <tr>
-                    <td><input type="text" id="department" placeholder="Enter department"></td>
-                    <td><input type="text" id="employee-name" placeholder="Enter employee name"></td>
-                    <td><input type="text" id="employee-id" placeholder="Enter employee ID"></td>
-                </tr>
-            </table>
-        </section>
+            <!-- Date and Details -->
+            <section class="date-selection mb-4">
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="month">Month:</label>
+                        <select id="month" class="form-control" required></select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="year">Year:</label>
+                        <select id="year" class="form-control" required></select>
+                    </div>
+                </div>
+            </section>
 
-        <section class="container date-selection">
-            <label for="month">Month:</label>
-            <select id="month"></select>
+            <!-- Leave Application Details -->
+            <section class="leave-application mb-4">
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Date</th>
+                            <th>Shift</th>
+                            <th>Out</th>
+                            <th>In</th>
+                            <th>SA (Mins)</th>
+                            <th>Reason</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="date" class="form-control" id="date" required></td>
+                            <td><input type="text" class="form-control" id="shift" required></td>
+                            <td><input type="time" class="form-control" id="out-time" required></td>
+                            <td><input type="time" class="form-control" id="in-time" required></td>
+                            <td><input type="number" class="form-control" id="sa-minutes" placeholder="Enter minutes" required></td>
+                            <td>
+                                <select id="reason" class="form-control" required>
+                                    <option value="" disabled selected>Select reason</option>
+                                    <option value="personal">Personal</option>
+                                    <option value="official">Official</option>
+                                </select>
+                            </td>                    
+                            <td><input type="text" class="form-control" id="remarks" placeholder="Enter remarks" required></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
 
-            <label for="year">Year:</label>
-            <select id="year"></select>
-        </section>
-
-        <section class="container leave-application">
-            <table>
-                <tr>
-                    <th>Date</th>
-                    <th>Shift</th>
-                    <th>Out</th>
-                    <th>In</th>
-                    <th>SA (Mins)</th>
-                    <th>Reason</th>
-                    <th>Remarks</th>
-                </tr>
-                <tr>
-                    <td><input type="date" id="date"></td>
-                    <td><input type="text" id="shift"></td>
-                    <td><input type="time" id="out-time"></td>
-                    <td><input type="time" id="in-time"></td>
-                    <td><input type="number" id="sa-minutes" placeholder="Enter minutes"></td>
-                    <td width="15%">
-                        <select id="reason"> <!-- Ensure the ID is unique and matches your JS -->
-                            <option value="" disabled selected>Select reason</option>
-                            <option value="personal">Personal</option>
-                            <option value="official">Official</option>
-                        </select>
-                    </td>                    
-                    <td><input type="text" id="remarks" placeholder="Enter remarks"></td>
-                </tr>
-            </table>
-        </section>
-
-        <form id="leave-form" class="container">
-            <button type="submit" class="btn">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </main>
 
-    <footer>
-        <!-- add footer -->
+    <footer class="text-center py-3 bg-light">
+        <p>&copy; 2024 Company Name. All rights reserved.</p>
     </footer>
 
-    <script src="../js/scripts.js"></script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const monthSelect = document.getElementById('month');
+            const yearSelect = document.getElementById('year');
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            const currentMonth = currentDate.getMonth();
+
+            for (let i = 0; i < 12; i++) {
+                const option = document.createElement('option');
+                option.value = (i + 1).toString().padStart(2, '0');
+                option.text = new Date(0, i).toLocaleString('default', { month: 'long' });
+                monthSelect.add(option);
+            }
+            monthSelect.value = (currentMonth + 1).toString().padStart(2, '0');
+
+            for (let year = currentYear - 1; year <= currentYear + 1; year++) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.text = year;
+                yearSelect.add(option);
+            }
+            yearSelect.value = currentYear;
+
+            document.getElementById('leave-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Collect form data
+                const formData = {
+                    id: generateUniqueId(),
+                    employeeName: document.getElementById('employee-name').value,
+                    employeeId: document.getElementById('employee-id').value,
+                    department: document.getElementById('department').value,
+                    date: document.getElementById('date').value,
+                    shift: document.getElementById('shift').value,
+                    outTime: document.getElementById('out-time').value,
+                    inTime: document.getElementById('in-time').value,
+                    duration: document.getElementById('sa-minutes').value,
+                    reason: document.getElementById('reason').value,
+                    remarks: document.getElementById('remarks').value,
+                    status: 'pending'
+                };
+
+                // Validate all fields are filled
+                if (Object.values(formData).some(field => field === "")) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+
+                // Save data to localStorage
+                let leaveRequests = JSON.parse(localStorage.getItem('leaveRequests') || '[]');
+                leaveRequests.push(formData);
+                localStorage.setItem('leaveRequests', JSON.stringify(leaveRequests));
+                
+                alert('Leave request submitted successfully');
+                window.location.href = 'employee-home.html';
+            });
+        });
+
+        function generateUniqueId() {
+            return 'req-' + Math.floor(Math.random() * 1000000);
+        }
+    </script>
 </body>
 </html>
